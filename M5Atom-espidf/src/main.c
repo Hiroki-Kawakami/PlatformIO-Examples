@@ -1,11 +1,19 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "sdkconfig.h"
 #include "esp_err.h"
 #include "iot_button.h"
 #include "led_strip.h"
 
+#if CONFIG_IDF_TARGET_ESP32
+// ATOM Lite, ATOM U
 #define BUTTON_PIN GPIO_NUM_39
 #define LED_PIN    GPIO_NUM_27
+#elif CONFIG_IDF_TARGET_ESP32S3
+// AtomS3 Lite, AtomS3U
+#define BUTTON_PIN GPIO_NUM_41
+#define LED_PIN    GPIO_NUM_35
+#endif
 
 static const uint8_t led_colors[][3] = {
     { 30,  0,  0 },  // Red
